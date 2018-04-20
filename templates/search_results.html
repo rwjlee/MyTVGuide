@@ -1,0 +1,19 @@
+{% extends 'base.html' %} 
+
+{% block body %}
+
+<h1>Results ... </h1>
+
+{% for show in shows %}
+<div class="border border-secondary">
+    <h5>{{show.title}}</h5>
+    {% if session.user_id %}
+        <a href="{{url_for('likes_show', show_id = show.id)}}" class="btn btn-primary">Likes</a>
+    {% else %}
+        <a href="{{url_for('register')}}" class="btn btn-primary">Likes</a>
+    {% endif %}
+</div>
+
+{% endfor %}
+
+{% endblock %}

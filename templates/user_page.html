@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h1>Hello {{session.username}}</h1>
+
+{% for show in shows %}
+
+<div class="border border-secondary col-8 py-2 my-3">
+    <div class="row">
+        <p>{{show.title}}</p>
+        <div class="col-6">{{show.id}}</div>
+        <div class="col-2"><a href="" class="btn btn-primary">Unlike</a></div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}
