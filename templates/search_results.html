@@ -2,13 +2,19 @@
 
 {% block body %}
 
-
-
 {% if shows %}
 <h1>Results ... </h1>
+<div class="container">
+    <div class="row">
     {% for show in shows %}
-    <div class="border border-secondary">
-        <h5>{{show.title}}</h5>
+    <div class="col-3 p-2 my-4">
+        {% if show.image_url %}
+        <img src="{{show.image_url}}" class="pic">
+        {% else %}
+        <img src="http://static.tvmaze.com/images/no-img/no-img-portrait-text.png" class="pic">
+        {% endif %}
+        <div><a href="{{url_for('show_page', show_id = show.id)}}">{{show.title}}</a></div>
+        <div>
         {% if session.user_id %}
             {% if show.has_followers %}
                 {% for follower in show.has_followers if follower.user_id == session.user_id %}   
@@ -24,8 +30,11 @@
         {% else %}
             <a href="{{url_for('login')}}" class="btn btn-primary">Like</a>
         {% endif %}
+        </div>
     </div>
     {% endfor %}
+    </div>
+</div>
 
 {% else %}
 <h1>No Results</h1>

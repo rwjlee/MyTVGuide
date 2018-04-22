@@ -93,7 +93,7 @@ def user_page(user_id):
         show = db.get_show_by_id(like.show_id)
         print("++++++{}+++++".format(show.title))
         db_shows.append(show)
-    return render_template('user_page.html', shows = db_shows)
+    return render_template('user_page.html', shows = db_shows, user = user)
 
 @app.route('/search')
 def search():

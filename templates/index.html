@@ -5,16 +5,7 @@
 {% if session.user_id %}
 <h1>Hello {{session.username}}</h1>
 
-{% for show in shows %}
-<h2>{{show.title}}</h2>
-<div class="border border-secondary col-8 py-2 my-3">
-    <div class="row">
-        <div class="col-6">{{show.id}}</div>
-        <div class="col-2"><a href="" class="btn btn-primary">Unlike</a></div>
-    </div>
-</div>
-
-{% endfor %}
+{% include user_page %}
 
 {% else %}
 <h1>You are not logged in</h1>

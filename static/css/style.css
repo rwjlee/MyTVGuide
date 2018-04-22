@@ -3,3 +3,7 @@
     border-left: 1px solid #eee;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
 }
+
+.pic {
+    height: 300px;
+}
