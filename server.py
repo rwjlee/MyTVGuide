@@ -13,6 +13,8 @@ csrf = CSRFProtect(app)
 
 @app.route('/')
 def index():
+    if session:
+        return redirect(url_for('user_page', user_id = session['user_id']))
     return render_template('index.html')
 
 @app.route('/register')
@@ -119,13 +121,20 @@ def likes_show(show_id):
     user_id = session['user_id']
     user = db.get_user_by_id(user_id)
     db.create_like(user_id, show_id)
-
     return redirect(url_for('user_page', user_id = user_id))
 
+@app.route('/unlike_show/<show_id>')
+def unlikes_show(show_id):
+    user_id = session['user_id']
+    db.delete_like(user_id, show_id)
+    return redirect(url_for('user_page', user_id = user_id))
 
-@app.route('/user_page/<user_id>/delete_like/<show_id>')
-def delete_likes():
-    pass
+@app.route('/show_page/<show_id>')
+def show_page(show_id):
+    db_followers = db.get_followers_by_show(show_id)
+    db_show = db.get_show_by_id(show_id)
+    return render_template('show_page.html', followers = db_followers, show = db_show)
+    
 
 if __name__ == '__main__':
     app.jinja_env.auto_reload = True

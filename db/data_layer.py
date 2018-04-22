@@ -86,7 +86,8 @@ def get_like(user_id, show_id):
 
 def delete_like(user_id, show_id):
     uid_to_sid = str(user_id) + '_' + str(show_id)
-    
+    like = get_like(user_id, show_id)
+    return db.delete(like)
 
 def get_show_by_id(show_id):
     return db.open().query(Show).filter(Show.id == show_id).one()
@@ -97,7 +98,14 @@ def get_shows_by_user(user_id):
     return shows
 
 def get_followers_by_show(show_id):
-    pass
+    followers = []
+    try:
+        likes = db.open().query(Like).filter(Like.show_id == show_id).all()
+        followers = [get_user_by_id(like.user_id) for like in likes]
+    except:
+        pass
+
+    return followers
 
 def get_user_by_id(user_id):
     return db.open().query(User).filter(User.id == user_id).one()

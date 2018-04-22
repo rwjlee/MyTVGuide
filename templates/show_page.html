@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h1>{{show.title}}</h1>
+
+{% if followers | length > 0 %}
+
+{% for follower in followers %}
+<div class="border border-secondary col-8 py-2 my-3">
+    <div class="row">
+        <a class="mx-3" href="{{url_for('user_page', user_id = follower.id)}}">{{follower.name}}</a>
+        <p>{{follower.email}}</p>
+    </div>
+</div>
+
+{% endfor %}
+
+{% else %}
+<p>no follower</p>
+
+
+
+{% endif %}
+
+{% endblock %}

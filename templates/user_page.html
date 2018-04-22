@@ -2,18 +2,19 @@
 
 {% block body %}
 
-<h1>Hello {{session.username}}</h1>
+{% if shows %}
 
 {% for show in shows %}
-
 <div class="border border-secondary col-8 py-2 my-3">
     <div class="row">
-        <p>{{show.title}}</p>
+        <p><a href="{{url_for('show_page', show_id = show.id)}}" >{{show.title}}</a></p>
         <div class="col-6">{{show.id}}</div>
-        <div class="col-2"><a href="" class="btn btn-primary">Unlike</a></div>
+        <div class="col-2"><a href="{{url_for('unlikes_show', show_id = show.id)}}" class="btn btn-primary">Unlike</a></div>
     </div>
 </div>
 
 {% endfor %}
+
+{% endif %}
 
 {% endblock %}
